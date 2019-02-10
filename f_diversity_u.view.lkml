@@ -29,7 +29,7 @@ view: us_diversity {
     html: {% if {{value}} > 0 %}
     <i class="fa fa-3x fa-arrow-circle-up" style="color:#4897CE;"></i><p>{{rendered_value}}</p>
     {% elsif {{value}} < 0 %}
-    <i class="fa fa-3x fa-arrow-circle-down" style="color:#D6782C;"></i><p>{{rendered_value}}</p>
+    <i class="fa fa-3x fa-arrow-circle-down" style="color:#ffc700;"></i><p>{{rendered_value}}</p>
     {% endif %};;
   }
 
@@ -40,7 +40,7 @@ view: us_diversity {
     html: {% if {{value}} > 0 %}
     <i class="fa fa-3x fa-arrow-circle-up" style="color:#4897CE;"></i><p>{{rendered_value}}</p>
     {% elsif {{value}} < 0 %}
-    <i class="fa fa-3x fa-arrow-circle-down" style="color:#D6782C;"></i><p>{{rendered_value}}</p>
+    <i class="fa fa-3x fa-arrow-circle-down" style="color:#ffc700;"></i><p>{{rendered_value}}</p>
     {% endif %};;
   }
 
