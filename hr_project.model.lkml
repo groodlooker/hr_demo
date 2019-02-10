@@ -14,6 +14,8 @@ explore: f_compliance {}
 
 explore: f_diversity_c {}
 
-explore: f_diversity_u {}
+explore: us_diversity {}
 
 explore: f_headcount {}
+
+# explore: f_diversity_comb {}

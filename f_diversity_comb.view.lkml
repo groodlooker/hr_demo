@@ -1,14 +1,24 @@
-view: f_diversity_c {
-  sql_table_name: ferrovial.f_diversity_c ;;
+view: f_diversity_comb {
+  sql_table_name: ferrovial.f_diversity_comb ;;
 
   dimension: age {
     type: number
-    sql: ROUND(${TABLE}.Age) ;;
+    sql: ${TABLE}.Age ;;
   }
 
-  dimension: annual_salary__no_round___text {
+  dimension: annual_salary_us {
+    type: number
+    sql: ${TABLE}.Annual_Salary ;;
+  }
+
+  dimension: annual_salary_can {
     type: number
     sql: ${TABLE}.Annual_Salary__No_round___Text ;;
+  }
+
+  dimension: annual_salary {
+    type: number
+    sql:  ;;
   }
 
   dimension: cost_center {
@@ -86,16 +96,6 @@ view: f_diversity_c {
     sql: ${TABLE}.Hire_Date ;;
   }
 
-  dimension: days_with_company {
-    type: number
-    sql: DATE_DIFF(CURRENT_DATE(),${hire_date},DAY) ;;
-  }
-
-  dimension: years_with_company {
-    type: number
-    sql: DATE_DIFF(CURRENT_DATE(),${hire_date},DAY) / 365 ;;
-  }
-
   dimension: last_name {
     type: string
     sql: ${TABLE}.Last_Name ;;
@@ -104,6 +104,11 @@ view: f_diversity_c {
   dimension: manager_s_name {
     type: string
     sql: ${TABLE}.Manager_s_Name ;;
+  }
+
+  dimension: number_of_records {
+    type: number
+    sql: ${TABLE}.Number_of_Records ;;
   }
 
   dimension: organizational_unit_desc {
@@ -136,6 +141,11 @@ view: f_diversity_c {
     sql: ${TABLE}.Position__Short_Text_ ;;
   }
 
+  dimension: table_name {
+    type: string
+    sql: ${TABLE}.Table_Name ;;
+  }
+
   dimension: termination_date {
     type: string
     sql: ${TABLE}.Termination_Date ;;
@@ -148,6 +158,6 @@ view: f_diversity_c {
 
   measure: count {
     type: count
-    drill_fields: [first_name, last_name, manager_s_name]
+    drill_fields: [table_name, first_name, manager_s_name, last_name]
   }
 }
