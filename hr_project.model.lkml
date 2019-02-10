@@ -4,7 +4,7 @@ connection: "lookerdata"
 include: "*.view"
 
 datagroup: hr_project_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
+  sql_trigger: SELECT MAX(Hire_Date) FROM ferrovial.f_diversity_u;;
   max_cache_age: "1 hour"
 }
 

@@ -1,5 +1,6 @@
 view: pay_by_position {
   derived_table: {
+    datagroup_trigger: hr_project_default_datagroup
     explore_source: us_diversity {
       column: position___description {}
       column: location {}

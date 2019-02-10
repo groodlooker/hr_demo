@@ -24,7 +24,24 @@ view: us_diversity {
 
   dimension: salary_difference {
     type: number
-    sql: (${pay_by_position.average_salary} - ${annual_salary}) / NULLIF(${annual_salary}) ;;
+    sql: (${annual_salary}-${pay_by_position.average_salary}) / NULLIF(${pay_by_position.average_salary},0) ;;
+    value_format_name: percent_1
+    html: {% if {{value}} > 0 %}
+    <i class="fa fa-3x fa-arrow-circle-up" style="color:#4897CE;"></i><p>{{rendered_value}}</p>
+    {% elsif {{value}} < 0 %}
+    <i class="fa fa-3x fa-arrow-circle-down" style="color:#D6782C;"></i><p>{{rendered_value}}</p>
+    {% endif %};;
+  }
+
+  dimension: tenure_difference {
+    type: number
+    sql: (${tenure_months}-${pay_by_position.average_tenure}) / NULLIF(${pay_by_position.average_tenure},0) ;;
+    value_format_name: percent_1
+    html: {% if {{value}} > 0 %}
+    <i class="fa fa-3x fa-arrow-circle-up" style="color:#4897CE;"></i><p>{{rendered_value}}</p>
+    {% elsif {{value}} < 0 %}
+    <i class="fa fa-3x fa-arrow-circle-down" style="color:#D6782C;"></i><p>{{rendered_value}}</p>
+    {% endif %};;
   }
 
   measure: total_salary {
@@ -264,11 +281,11 @@ view: us_diversity {
     value_format_name: percent_0
     sql: (${2018_count} - ${2017_count}) / nullif(${2017_count},0) ;;
     html: {% if {{value}} > 0 %}
-    <i class="fa fa-3x fa-arrow-circle-o-up" style="color:#4897CE;"></i><p>{{rendered_value}}</p>
+    <p>{{rendered_value}}</p><i class="fa fa-3x fa-arrow-circle-o-up" style="color:#4897CE;"></i>
     {% elsif {{value}} < 0 %}
-    <i class="fa fa-3x fa-arrow-circle-o-down" style="color:#D6782C;"></i><p>{{rendered_value}}</p>
+    <p>{{rendered_value}}</p><i class="fa fa-3x fa-arrow-circle-o-down" style="color:#D6782C;"></i>
     {% else %}
-    <i class="fa fa-3x fa-minus" style="color:lightgray;"></i><p>{{ f_diversity_u.2018_count._value }}</p>
+    <i class="fa fa-3x fa-minus" style="color:lightgray;"></i><p>No Gap</p>
     {% endif %}
     ;;
   }
@@ -296,6 +313,26 @@ view: us_diversity {
     type: count_distinct
     view_label: "Employment Information"
     sql: ${personnel_number} ;;
+  }
+
+  measure: male_count {
+    type: count_distinct
+    sql: ${personnel_number} ;;
+    filters: {
+      field: gender
+      value: "Male"
+    }
+    html: <i class="fa fa-male" style="color:#B3C7C1;position:fixed;"></i><p>{{rendered_value}}</p> ;;
+  }
+
+  measure: female_count {
+    type: count_distinct
+    sql: ${personnel_number} ;;
+    filters: {
+      field: gender
+      value: "Female"
+    }
+    html: <i class="fa fa-female" style="color:#F6C844;position:fixed;"></i><p>{{rendered_value}}</p> ;;
   }
 
   dimension: position___description {
