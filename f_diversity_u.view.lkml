@@ -22,6 +22,11 @@ view: us_diversity {
     sql: ${TABLE}.Annual_Salary_ ;;
   }
 
+  dimension: salary_difference {
+    type: number
+    sql: (${pay_by_position.average_salary} - ${annual_salary}) / NULLIF(${annual_salary}) ;;
+  }
+
   measure: total_salary {
     type: sum
     view_label: "Employment Information"
@@ -282,6 +287,7 @@ view: us_diversity {
 
   dimension: personnel_number {
     type: number
+    primary_key: yes
     view_label: "Employee Details"
     sql: ${TABLE}.Personnel_Number ;;
   }
