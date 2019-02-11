@@ -1,5 +1,5 @@
 view: bls_absences {
-  sql_table_name: ferrovial.bls_absences ;;
+  sql_table_name: ferrovial.bls_absence ;;
 
   dimension: absence_rate_due_to_illness_or_injury {
     type: number
@@ -43,6 +43,7 @@ view: bls_absences {
 
   dimension: occupation {
     type: string
+    primary_key: yes
     sql: ${TABLE}.OCCUPATION ;;
   }
 

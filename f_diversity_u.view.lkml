@@ -23,6 +23,31 @@ view: us_diversity {
     sql: ${TABLE}.Annual_Salary_ ;;
   }
 
+  dimension: random_days {
+    hidden: yes
+    type: number
+    sql: RAND() ;;
+  }
+
+  dimension: days_absent {
+    type: number
+    sql: case
+      when ${random} < 0.1 then 1
+      when ${random} >= 0.1 and ${random} < 0.25 then 2
+      when ${random} >= 0.25 and ${random} < 0.45 then 3
+      when ${random} >= 0.45 and ${random} < 0.7 then 4
+      when ${random} >= 0.7 and ${random} < 0.8 then 5
+      when ${random} >= 0.8 and ${random} < 0.9 then 6
+      when ${random} >= 0.9 and ${random} < 0.95 then 7
+      else 8 end ;;
+  }
+
+  dimension: absence_rate_employee {
+    sql: ((${days_absent} * 8) / 1820)*100 ;;
+    value_format_name: decimal_1
+    type: number
+  }
+
   dimension: salary_difference {
     type: number
     sql: (${annual_salary}-${pay_by_position.average_salary}) / NULLIF(${pay_by_position.average_salary},0) ;;
