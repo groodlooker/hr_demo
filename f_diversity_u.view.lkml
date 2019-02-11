@@ -97,9 +97,9 @@ view: us_diversity {
             THEN "Silent Generation"
          WHEN ${date_of_birth_year} >= 1946 AND ${date_of_birth_year} < 1965
             THEN "Baby Boomer"
-         WHEN ${date_of_birth_year} >= 1965 AND ${date_of_birth_year} < 1980
+         WHEN ${date_of_birth_year} >= 1965 AND ${date_of_birth_year} <= 1980
             THEN "Gen X"
-         WHEN ${date_of_birth_year} >= 1980 AND ${date_of_birth_year} < 1997
+         WHEN ${date_of_birth_year} > 1980 AND ${date_of_birth_year} < 1997
             THEN "Millennial"
         ELSE "Gen Z" END
     ;;
