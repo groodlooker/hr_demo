@@ -17,6 +17,7 @@ view: us_diversity {
 
   dimension: annual_salary {
     type: number
+    drill_fields: [ethnicity_category,generation,gender]
     view_label: "Employment Information"
     value_format_name: usd_0
     sql: ${TABLE}.Annual_Salary_ ;;
@@ -61,6 +62,7 @@ view: us_diversity {
 
   measure: average_salary {
     type: average
+    drill_fields: [personnel_number,full_name,manager_email,average_salary]
     view_label: "Employment Information"
     value_format_name: usd_0
     sql: ${annual_salary} ;;
@@ -135,6 +137,30 @@ view: us_diversity {
     view_label: "Employee Details"
     sql: CASE WHEN ${ethnic_origin} IS NULL THEN "Not Stated" ELSE ${ethnic_origin} END ;;
     drill_fields: [generation,full_name,ethnicity_category]
+  }
+
+  dimension: recent_performance_rating {
+    type: number
+    sql:
+    case
+      when ${random} < 0.1 then 1
+      when ${random} >= 0.1 and ${random} < 0.25 then 2
+      when ${random} >= 0.25 and ${random} < 0.75 then 3
+      when ${random} >= 0.75 and ${random} < 0.93 then 4
+      else 5 end
+    ;;
+  }
+
+  measure: average_performance_rating {
+    type: average
+    value_format_name: decimal_1
+    sql: ${recent_performance_rating} ;;
+  }
+
+  dimension: random {
+    type: number
+    hidden: yes
+    sql: RAND()/2 ;;
   }
 
   dimension: ethnicity {
@@ -299,12 +325,16 @@ view: us_diversity {
   dimension: location {
     type: string
     map_layer_name: us_states
-    sql: SUBSTR(REPLACE(${person_sub_area},",",""),-2) ;;
+    sql: TRIM(SUBSTR(REPLACE(${person_sub_area},",",""),-2)) ;;
   }
 
   dimension: personnel_number {
     type: number
     primary_key: yes
+    link: {
+      label: "View details for {{ value }}"
+      url: "https://googlecloud.looker.com/dashboards/237?Personnel%20Number={{ value }}"
+    }
     view_label: "Employee Details"
     sql: ${TABLE}.Personnel_Number ;;
   }
