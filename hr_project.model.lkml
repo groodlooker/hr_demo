@@ -21,6 +21,12 @@ explore: us_diversity {
     type: left_outer
     relationship: many_to_one
   }
+  join: new_titles {
+    view_label: "Job Information"
+    fields: [new_titles.string_field_1]
+    sql_on: ${us_diversity.position___description} = ${new_titles.string_field_0} ;;
+    relationship: one_to_one
+  }
 }
 
 

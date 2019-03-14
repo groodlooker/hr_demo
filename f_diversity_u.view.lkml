@@ -261,7 +261,7 @@ view: us_diversity {
 
   dimension: manager_email {
     type: string
-    sql: LOWER(CONCAT(REPLACE(${manager_name}," ","."),"@ferrovial.com")) ;;
+    sql: LOWER(CONCAT(REPLACE(${manager_name}," ","."),"@hrdepartment.com")) ;;
     action: {
       label: "Email {{ value }}"
       url: "https:mailto:"
