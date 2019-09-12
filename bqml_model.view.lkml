@@ -119,9 +119,11 @@ view: predicted_attrition_probs {
   }
   dimension: prob {
     type: number
+    hidden: yes
   }
   measure: average_probability {
     type: average
+    description: "The probability of the prediction"
     sql: ${prob} ;;
   }
   dimension: label {
