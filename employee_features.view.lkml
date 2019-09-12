@@ -1,9 +1,15 @@
+explore: employee_features {}
 view: employee_features {
   sql_table_name: ferrovial.employee_features ;;
 
   dimension: age {
     type: number
     sql: ${TABLE}.Age ;;
+  }
+
+  dimension: random {
+    type: number
+    sql: RAND() ;;
   }
 
   dimension: attrition {
@@ -48,6 +54,7 @@ view: employee_features {
 
   dimension: employee_number {
     type: number
+    primary_key: yes
     sql: ${TABLE}.EmployeeNumber ;;
   }
 

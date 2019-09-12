@@ -5,7 +5,7 @@ include: "*.view"
 
 datagroup: hr_project_default_datagroup {
   sql_trigger: SELECT MAX(Hire_Date) FROM ferrovial.f_diversity_u;;
-  max_cache_age: "1 hour"
+  max_cache_age: "72 hour"
 }
 
 persist_with: hr_project_default_datagroup
